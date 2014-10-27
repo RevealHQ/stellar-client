@@ -103,12 +103,13 @@ sc.service('session', function($rootScope, $http, $timeout, StellarNetwork, Wall
   };
 
   Session.prototype.isPersistent = function() {
-    var rememberUser;
-    try {
-      rememberUser = JSON.parse(localStorage.rememberUser);
-    } catch (err) {}
+    // var rememberUser;
+    // try {
+    //   rememberUser = JSON.parse(localStorage.rememberUser);
+    // } catch (err) {}
 
-    return Options.PERSISTENT_SESSION || rememberUser;
+    // return Options.PERSISTENT_SESSION || rememberUser;
+    return false;
   };
 
   Session.prototype.syncWallet = function(action) {

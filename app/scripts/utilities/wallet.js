@@ -47,7 +47,7 @@ angular.module('stellarClient').factory('Wallet', function($q, $http, ipCookie) 
    * @static
    */
   Wallet.decrypt = function(encryptedWallet, id, key){
-    var rawKey = sjcl.codec.hex.toBits(key);
+    var rawKey = sjcl.codec.utf8String.toBits(key);
 
     var keychainData = Wallet.decryptData(encryptedWallet.keychainData, rawKey);
     var mainData;
@@ -341,14 +341,7 @@ angular.module('stellarClient').factory('Wallet', function($q, $http, ipCookie) 
     var credentials = username.toLowerCase() + password;
     var salt = sjcl.codec.utf8String.toBits(credentials);
 
-    var id = sjcl.misc.scrypt(
-      credentials,
-      salt,
-      Wallet.SETTINGS.SCRYPT.N,
-      Wallet.SETTINGS.SCRYPT.r,
-      Wallet.SETTINGS.SCRYPT.p,
-      Wallet.SETTINGS.SCRYPT.SIZE/8
-    );
+    var id = RNCryptor.KeyForPassword(salt, salt);
 
     return sjcl.codec.hex.fromBits(id);
   };
@@ -357,14 +350,7 @@ angular.module('stellarClient').factory('Wallet', function($q, $http, ipCookie) 
     var credentials = id + username.toLowerCase() + password;
     var salt = sjcl.codec.utf8String.toBits(credentials);
 
-    var key = sjcl.misc.scrypt(
-      credentials,
-      salt,
-      Wallet.SETTINGS.SCRYPT.N,
-      Wallet.SETTINGS.SCRYPT.r,
-      Wallet.SETTINGS.SCRYPT.p,
-      Wallet.SETTINGS.SCRYPT.SIZE/8
-    );
+    var key = RNCryptor.KeyForPassword(salt, salt);
 
     return sjcl.codec.hex.fromBits(key);
   };
@@ -525,35 +511,19 @@ angular.module('stellarClient').factory('Wallet', function($q, $http, ipCookie) 
    * @static
    */
   Wallet.decryptData = function(encryptedData, key) {
-    var rawCipherText, rawIV, cipherName, mode;
+    var resultObject;
 
     try {
-      // Parse the base64 encoded JSON object.
-      var resultObject = JSON.parse(atob(encryptedData));
-
-      // Extract the cipher text from the encrypted data.
-      rawCipherText = sjcl.codec.base64.toBits(resultObject.cipherText);
-
-      // Extract the cipher text from the encrypted data.
-      rawIV = sjcl.codec.base64.toBits(resultObject.IV);
-
-      // Extract the cipher name from the encrypted data.
-      cipherName = resultObject.cipherName;
-      mode = resultObject.mode;
+      resultObject = sjcl.codec.base64.toBits(encryptedData);
     } catch(e) {
       // The encoded data does not represent valid base64 values.
       throw('Data corrupt!');
     }
 
-    // Initialize the cipher algorithm with the key.
-    var cipher = new sjcl.cipher[cipherName](key);
+    var plaintext = RNCryptor.Decrypt(key, resultObject);
+    var plaintextStr = sjcl.codec.utf8String.fromBits(plaintext);
 
-    // Decrypt the data in CCM mode using AES and the given IV.
-    var rawData = sjcl.mode[mode].decrypt(cipher, rawCipherText, rawIV);
-    var data = sjcl.codec.utf8String.fromBits(rawData);
-
-    // Parse and return the decrypted data as a JSON object.
-    return JSON.parse(data);
+    return JSON.parse(plaintextStr);
   };
 
   function catchAndSwallowSecurityErrors(fn) {

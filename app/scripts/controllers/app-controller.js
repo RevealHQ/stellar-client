@@ -28,7 +28,7 @@ sc.controller('AppCtrl', function($scope, $rootScope, StellarNetwork, session, $
     var accountObj;
 
     $scope.getLogoLink = function () {
-        return session.get('loggedIn') ? '#/' : 'http://www.stellar.org';
+        return session.get('loggedIn') ? '#/' : 'http://www.rvl.is';
     };
 
 

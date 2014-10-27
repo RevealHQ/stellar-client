@@ -31,7 +31,7 @@ sc.controller('NavCtrl', function($scope, session) {
   }
 
   $scope.getLogoLink = function () {
-    return $scope.loggedIn ? '#/' : 'http://www.stellar.org';
+    return $scope.loggedIn ? '#/' : 'http://www.rvl.is';
   };
 
   $scope.showTradingLink = function() {

@@ -65,12 +65,12 @@
   }
 
   .navbar-brand {
-    color: #09B5E5;
+    color: $brand-primary;
     font-weight: $heavy-weight;
     font-size: 26px;
 
     &:hover {
-      color: #09B5E5;
+      color: $brand-primary;
     }
   }
 }

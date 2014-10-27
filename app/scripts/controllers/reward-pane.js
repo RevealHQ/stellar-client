@@ -21,7 +21,7 @@ sc.controller('RewardPaneCtrl', function ($http, $scope, $rootScope, $q, session
     var wallet = session.get('wallet');
     var showRewardsSetting = wallet.get('mainData', 'showRewards', true);
 
-    return !$scope.rewardsComplete && showRewardsSetting;
+    return false;
   };
 
   var firstRequest = true;
@@ -198,7 +198,7 @@ sc.controller('RewardPaneCtrl', function ($http, $scope, $rootScope, $q, session
   }
 
   function hasCompletedRewards() {
-    return $scope.showRewardsComplete;
+    return true;
   }
 
   function processReadyRewards() {

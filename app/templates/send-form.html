@@ -44,9 +44,9 @@
                     {{send.str_deficiency | rpamount}} STR to fund it.
                     <a href="https://www.stellar.org/faq/#_Why_is_there_a_minimum_balance" target="_blank" >More information</a>
                 </p>
-                <p ng-show="account.max_spend.to_number() < send.amount * 1000000" class="send-form-status">
+<!--                 <p ng-show="account.max_spend.to_number() < send.amount * 1000000" class="send-form-status">
                     You need a minimum balance of 20 Stellars to send. <a href="https://www.stellar.org/faq/#_Why_is_there_a_minimum_balance" target="_blank" >More information</a>
-                </p>
+                </p> -->
                 <p ng-show="send.pathStatus == 'checking'" class="send-form-status">Checking</p>
                 <p ng-show="send.pathStatus == 'fed-check'" class="send-form-status">Analyzing address</p>
                 <p ng-show="send.pathStatus == 'pending'" class="send-form-status">Calculating paths</p>
