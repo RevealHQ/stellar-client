@@ -71,8 +71,8 @@ stellarClient.config(function($httpProvider, $stateProvider, $urlRouterProvider,
       authenticate: false
     })
     .state('register', {
-      url:         '/register?inviteCode',
-      templateUrl: 'states/register.html',
+      url:         '/login',
+      templateUrl: 'states/login.html',
       authenticate: false
     })
     .state('logout', {
@@ -125,7 +125,7 @@ stellarClient.run(function($location, $state, ipCookie){
   var forceToRegister = atRoot && firstTime;
 
     if(forceToRegister) {
-      $state.transitionTo('register');
+      $state.transitionTo('login');
       ipCookie("weve_been_here_before", "true", {expires: new Date('01 Jan 2030 00:00:00 GMT')});
     }
 });
