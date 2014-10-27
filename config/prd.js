@@ -25,8 +25,8 @@ window.Options = {
     DEFAULT_IDLE_LOGOUT_TIMEOUT : 30 * 60 * 1000, //15 minutes
     COOKIE_SECURE: true,
 
-    REPORT_ERRORS : false,
-    SENTRY_DSN : "https://5c08986e949742d2bb29e1ffac78e50a@app.getsentry.com/26645",
+    REPORT_ERRORS : true,
+    SENTRY_DSN : "https://0ec1fa7e43c84e768aa8e1503d8a9879@app.getsentry.com/32163",
 
     // Number of transactions each page has in balance tab notifications
     TRANSACTIONS_PER_PAGE: 25,
