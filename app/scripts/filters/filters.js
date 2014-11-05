@@ -59,7 +59,7 @@ filterMod.filter('addressToUsername', function (contacts) {
           if (contact.domain === Options.DEFAULT_FEDERATION_DOMAIN) {
             return contact.user;
           } else {
-            return contact.user + "@" + contact.domain;
+            return contact.destination + "@" + contact.domain;
           }
         }
         if (!input){
