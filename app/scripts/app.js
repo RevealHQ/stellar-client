@@ -60,16 +60,16 @@ stellarClient.config(function($httpProvider, $stateProvider, $urlRouterProvider,
       templateUrl: 'states/login.html',
       authenticate: false
     })
-    .state('recovery', {
-      url:         '/recovery',
-      templateUrl: 'states/recovery.html',
-      authenticate: false
-    })
-    .state('username-recovery', {
-      url:         '/username-recovery',
-      templateUrl: 'states/username_recovery.html',
-      authenticate: false
-    })
+    // .state('recovery', {
+    //   url:         '/recovery',
+    //   templateUrl: 'states/recovery.html',
+    //   authenticate: false
+    // })
+    // .state('username-recovery', {
+    //   url:         '/username-recovery',
+    //   templateUrl: 'states/username_recovery.html',
+    //   authenticate: false
+    // })
     .state('register', {
       url:         '/login',
       templateUrl: 'states/login.html',
@@ -84,21 +84,21 @@ stellarClient.config(function($httpProvider, $stateProvider, $urlRouterProvider,
       templateUrl: 'states/dashboard.html',
       authenticate: true
     })
-    .state('change_password', {
-      url:         '/change_password',
-      templateUrl: 'states/change_password.html',
-      authenticate: true
-    })
+    // .state('change_password', {
+    //   url:         '/change_password',
+    //   templateUrl: 'states/change_password.html',
+    //   authenticate: true
+    // })
     .state('settings', {
       url:         '/settings',
       templateUrl: 'states/settings.html',
       authenticate: true
     })
-    .state('invites', {
-      url:         '/invites',
-      templateUrl: 'states/invites.html',
-      authenticate: true
-    })
+    // .state('invites', {
+    //   url:         '/invites',
+    //   templateUrl: 'states/invites.html',
+    //   authenticate: true
+    // })
     .state('style-docs', {
       url:         '/style-docs',
       templateUrl: 'states/style-docs.html'

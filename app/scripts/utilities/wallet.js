@@ -478,28 +478,34 @@ angular.module('stellarClient').factory('Wallet', function($q, $http, ipCookie) 
     // Encode data into a JSON byte array.
     var rawData = sjcl.codec.utf8String.toBits(JSON.stringify(data));
 
-    // Initialize the cipher algorithm with the key.
-    var cipher = new sjcl.cipher[Wallet.SETTINGS.CIPHER_NAME](key);
+    var rawCipherText = RNCryptor.Encrypt(key, rawData);
 
-    // Encrypt the blob data in CCM mode using AES and a random 96bit IV.
-    Util.ensureEntropy();
-    var rawIV = sjcl.random.randomWords(3);
-    var rawCipherText = sjcl.mode[Wallet.SETTINGS.MODE].encrypt(cipher, rawData, rawIV);
-
-    // Base 64 encode.
-    var IV = sjcl.codec.base64.fromBits(rawIV);
     var cipherText = sjcl.codec.base64.fromBits(rawCipherText);
 
-    // Pack the results into a JSON encoded string.
-    var resultString = JSON.stringify({
-      IV: IV,
-      cipherText: cipherText,
-      cipherName: Wallet.SETTINGS.CIPHER_NAME,
-      mode: Wallet.SETTINGS.MODE
-    });
+    // // Initialize the cipher algorithm with the key.
+    // var cipher = new sjcl.cipher[Wallet.SETTINGS.CIPHER_NAME](key);
 
-    // Encode the JSON string as base64 to obscure it's structure.
-    return btoa(resultString);
+    // // Encrypt the blob data in CCM mode using AES and a random 96bit IV.
+    // Util.ensureEntropy();
+    // var rawIV = sjcl.random.randomWords(3);
+    // var rawCipherText = sjcl.mode[Wallet.SETTINGS.MODE].encrypt(cipher, rawData, rawIV);
+
+    // // Base 64 encode.
+    // var IV = sjcl.codec.base64.fromBits(rawIV);
+    // var cipherText = sjcl.codec.base64.fromBits(rawCipherText);
+
+    // // Pack the results into a JSON encoded string.
+    // var resultString = JSON.stringify({
+    //   IV: IV,
+    //   cipherText: cipherText,
+    //   cipherName: Wallet.SETTINGS.CIPHER_NAME,
+    //   mode: Wallet.SETTINGS.MODE
+    // });
+
+    // // Encode the JSON string as base64 to obscure it's structure.
+    // return btoa(resultString);
+
+    return cipherText;
   };
 
   /**

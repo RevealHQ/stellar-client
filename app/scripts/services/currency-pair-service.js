@@ -222,6 +222,7 @@ sc.service('CurrencyPairs', function($q, session) {
   function syncWallet() {
     //TODO: put this behind a debounced "save at your leisure type function" that
     //also doesn't actually sync if the wallets state hasn't changed
+    // FIXME acutally sync wallet
     session.syncWallet('update');
   }
 });
